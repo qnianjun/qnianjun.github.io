@@ -1,0 +1,131 @@
+baseURL: "https://YOUR_USERNAME.github.io/"
+languageCode: "zh-tw"
+title: "Mark"
+theme: ["PaperMod"]
+
+enableRobotsTXT: true
+enableEmoji: true
+buildDrafts: false
+buildFuture: false
+buildExpired: false
+
+pagination:
+  pagerSize: 8
+
+outputs:
+  home:
+    - HTML
+    - RSS
+    - JSON
+
+taxonomies:
+  category: categories
+  tag: tags
+
+params:
+  env: production
+  title: "Mark"
+  description: "Cybersecurity, programming, projects, CTF writeups and notes."
+  keywords:
+    - Cybersecurity
+    - Programming
+    - CTF
+    - Linux
+    - Docker
+    - Projects
+  author: "Mark"
+
+  defaultTheme: auto
+  disableThemeToggle: false
+
+  ShowReadingTime: true
+  ShowShareButtons: false
+  ShowPostNavLinks: true
+  ShowBreadCrumbs: true
+  ShowCodeCopyButtons: true
+  ShowWordCount: true
+  ShowRssButtonInSectionTermList: true
+  UseHugoToc: true
+  showtoc: false
+  tocopen: false
+  hidemeta: false
+  hideSummary: false
+
+  homeInfoParams:
+    Title: "Hi, I'm Mark!"
+    Content: >
+      Cybersecurity · Programming · CTF · Linux · Docker · Projects.
+      This is my personal corner of the internet where I document things I learn and build.
+
+  socialIcons:
+    - name: github
+      url: "https://github.com/qnianjun"
+
+  assets:
+    disableHLJS: true
+
+  cover:
+    hidden: true
+    hiddenInList: true
+    hiddenInSingle: true
+
+  editPost:
+    URL: "https://github.com/YOUR_USERNAME/YOUR_USERNAME.github.io/tree/main/content"
+    Text: "Edit this page"
+    appendFilePath: true
+
+  fuseOpts:
+    isCaseSensitive: false
+    shouldSort: true
+    location: 0
+    distance: 1000
+    threshold: 0.35
+    minMatchCharLength: 2
+    keys:
+      - title
+      - permalink
+      - summary
+      - content
+      - tags
+      - categories
+
+menu:
+  main:
+    - identifier: posts
+      name: Blog
+      url: /posts/
+      weight: 10
+
+    - identifier: projects
+      name: Projects
+      url: /projects/
+      weight: 20
+
+    - identifier: categories
+      name: Categories
+      url: /categories/
+      weight: 30
+
+    - identifier: tags
+      name: Tags
+      url: /tags/
+      weight: 40
+
+    - identifier: archives
+      name: Archives
+      url: /archives/
+      weight: 50
+
+    - identifier: about
+      name: About
+      url: /about/
+      weight: 60
+
+markup:
+  highlight:
+    noClasses: false
+    lineNos: true
+    anchorLineNos: true
+    codeFences: true
+    guessSyntax: true
+    style: monokai

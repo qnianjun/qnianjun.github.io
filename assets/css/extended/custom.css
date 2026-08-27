@@ -1,0 +1,43 @@
+/* Personal blog customization */
+
+/* Slightly wider reading area */
+.main {
+  max-width: 900px;
+}
+
+/* Tech-blog style code blocks */
+.post-content pre {
+  border-radius: 10px;
+}
+
+/* Cleaner headings */
+.post-content h2 {
+  margin-top: 2.2em;
+}
+
+.post-content h3 {
+  margin-top: 1.7em;
+}
+
+/* Category/tag pills */
+.terms-tags a {
+  border-radius: 999px;
+}
+
+/* Subtle header polish */
+.nav {
+  max-width: 1100px;
+}
+
+/* Home intro */
+.first-entry {
+  min-height: 260px;
+}
+
+/* Respect reduced-motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    scroll-behavior: auto !important;
+    transition: none !important;
+  }
+}
