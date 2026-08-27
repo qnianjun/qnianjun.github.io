@@ -1,0 +1,11 @@
+:root{--theme:#0b1120;--entry:#111827;--primary:#f3f4f6;--secondary:#9ca3af;--tertiary:#1f2937;--content:#e5e7eb;--border:#233047;}
+.dark{--theme:#0b1120;--entry:#111827;--primary:#f3f4f6;--secondary:#9ca3af;--tertiary:#1f2937;--content:#e5e7eb;--border:#233047;}
+body{background:var(--theme)}
+.main,.footer,.header{max-width:1400px}
+.header,.nav,.post-entry,.post-single,.profile_inner,.archive-entry,.terms-tags a{background:var(--entry);border-radius:20px;box-shadow:0 8px 24px rgba(0,0,0,.25)}
+.logo a,.post-title,.profile_inner h1{color:#60a5fa}
+.post-entry,.post-single{padding:1rem 1.5rem;border:1px solid var(--border)}
+.nav{padding:10px 18px;margin-top:10px}
+.profile_inner{padding:24px}
+.social-icons a:hover,.logo a:hover{color:#3b82f6}
+#menu a:hover{color:#60a5fa}
