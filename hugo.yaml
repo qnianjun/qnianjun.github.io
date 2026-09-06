@@ -1,5 +1,6 @@
-baseURL: "https://YOUR_USERNAME.github.io/"
+baseURL: "https://xn--mark-oc2g.tw/"
 languageCode: "zh-tw"
+hasCJKLanguage: true
 title: "Mark"
 theme: ["PaperMod"]
 
@@ -70,7 +71,7 @@ params:
     hiddenInSingle: true
 
   editPost:
-    URL: "https://github.com/YOUR_USERNAME/YOUR_USERNAME.github.io/tree/main/content"
+    URL: "https://github.com/qnianjun/qnianjun.github.io/tree/main/content"
     Text: "Edit this page"
     appendFilePath: true
 
