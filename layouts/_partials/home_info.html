@@ -1,0 +1,49 @@
+{{- with site.Params.homeInfoParams }}
+<article class="first-entry home-info hero-intro">
+    <div class="hero-layout">
+        <section class="hero-profile">
+        {{- with .Avatar }}
+        <div class="hero-avatar-wrap">
+            <img class="hero-avatar" src="{{ . | relURL }}" alt="{{ site.Params.author | default site.Title }}">
+        </div>
+        {{- else with .AvatarText }}
+        <div class="hero-avatar-wrap hero-monogram" aria-label="{{ site.Params.author | default site.Title }}">{{ . }}</div>
+        {{- end }}
+        {{- with .Eyebrow }}
+        <p class="hero-eyebrow">{{ . }}</p>
+        {{- end }}
+        <header class="entry-header">
+            <h1>{{ .Title | markdownify }}</h1>
+        </header>
+        <div class="entry-content md-content">
+            {{ $opts := dict "display" "block" }}
+            {{ .Content | $.Page.RenderString $opts }}
+        </div>
+        {{- with .Tags }}
+        <ul class="hero-tags" aria-label="Interests">
+            {{- range . }}
+            <li>{{ . }}</li>
+            {{- end }}
+        </ul>
+        {{- end }}
+        <footer class="entry-footer">
+            {{ partial "social_icons.html" (dict "align" site.Params.homeInfoParams.AlignSocialIconsTo) }}
+        </footer>
+        </section>
+        {{- with .SidePanel }}
+        <aside class="hero-side-panel" aria-label="{{ .Title }}">
+            {{- with .Eyebrow }}<p class="hero-eyebrow">{{ . }}</p>{{- end }}
+            {{- with .Title }}<h2>{{ . }}</h2>{{- end }}
+            {{- with .Content }}<p>{{ . }}</p>{{- end }}
+            {{- with .Links }}
+            <ul>
+                {{- range . }}
+                <li><a href="{{ .url | relURL }}">{{ .name }} <span aria-hidden="true">↗</span></a></li>
+                {{- end }}
+            </ul>
+            {{- end }}
+        </aside>
+        {{- end }}
+    </div>
+</article>
+{{- end -}}

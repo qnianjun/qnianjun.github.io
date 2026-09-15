@@ -53,10 +53,27 @@ params:
   hideSummary: false
 
   homeInfoParams:
+    AvatarText: "M"
+    Eyebrow: "MARK · DIGITAL NOTEBOOK"
     Title: "Hi, I'm Mark!"
     Content: >
-      Cybersecurity · Programming · CTF · Linux · Docker · Projects.
-      This is my personal corner of the internet where I document things I learn and build.
+      A place for security notes, things I build, and the rabbit holes worth documenting.
+    Tags:
+      - Security learner
+      - CTF explorer
+      - Builder
+      - Linux user
+    SidePanel:
+      Eyebrow: "START HERE"
+      Title: "Explore"
+      Content: "A few places to start, with room for whatever you are working on next."
+      Links:
+        - name: "Read the blog"
+          url: "/posts/"
+        - name: "See projects"
+          url: "/projects/"
+        - name: "About me"
+          url: "/about/"
 
   socialIcons:
     - name: github
