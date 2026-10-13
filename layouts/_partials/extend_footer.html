@@ -11,7 +11,7 @@
             button.title = label + ' (Alt + T)';
         }
         const meta = document.querySelector('meta[name="theme-color"]');
-        if (meta) meta.content = dark ? '#111916' : '#f7f8f4';
+        if (meta) meta.content = dark ? '#131822' : '#f6f7fa';
     };
     syncTheme();
     new MutationObserver(syncTheme).observe(root, { attributes: true, attributeFilter: ['data-theme'] });

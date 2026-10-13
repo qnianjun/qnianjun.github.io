@@ -1,34 +1,34 @@
 /* Site-owned design tokens. PaperMod switches html[data-theme]. */
 :root {
-  --theme: #f7f8f4;
+  --theme: #f6f7fa;
   --entry: #ffffff;
-  --primary: #202e29;
-  --secondary: #627169;
-  --tertiary: #dce7df;
-  --content: #34453c;
-  --border: #dce4dd;
-  --code-bg: #eaf0e9;
-  --code-block-bg: #202924;
-  --accent: #28664c;
-  --accent-soft: #e9f1e8;
-  --shadow: 0 12px 36px #243b2c08;
+  --primary: #252d3d;
+  --secondary: #626e82;
+  --tertiary: #dfe5f0;
+  --content: #394459;
+  --border: #dde2ec;
+  --code-bg: #eaf0f8;
+  --code-block-bg: #202735;
+  --accent: #365f9e;
+  --accent-soft: #e9eff9;
+  --shadow: 0 12px 36px #24324c08;
   --main-width: 1040px;
   --nav-width: 1040px;
   --radius: 18px;
   color-scheme: light;
 }
 :root[data-theme="dark"] {
-  --theme: #111916;
-  --entry: #19241f;
-  --primary: #e8eee7;
-  --secondary: #a6b6aa;
-  --tertiary: #35493c;
-  --content: #cdd8cd;
-  --border: #2c3c32;
-  --code-bg: #23352a;
-  --code-block-bg: #0e1612;
-  --accent: #a6d8b2;
-  --accent-soft: #243b2c;
+  --theme: #131822;
+  --entry: #1c2330;
+  --primary: #e8edf6;
+  --secondary: #a8b4c9;
+  --tertiary: #37445b;
+  --content: #cdd6e6;
+  --border: #2e3a50;
+  --code-bg: #253249;
+  --code-block-bg: #0f141e;
+  --accent: #a6c4f3;
+  --accent-soft: #263853;
   --shadow: 0 12px 36px #00000012;
   color-scheme: dark;
 }
