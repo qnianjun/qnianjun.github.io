@@ -70,3 +70,7 @@ Edit `hugo.yaml`:
 Edit `assets/css/extended/custom.css` for visual customization.
 
 Replace the placeholder links and author name before publishing.
+
+## Spotify 與頭像
+
+首頁支援 Spotify「正在聽」卡片與個人照片。設定方式見 [Spotify 與頭像設定](workers/spotify/README.md)。

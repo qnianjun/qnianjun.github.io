@@ -1,0 +1,14 @@
+name = "mark-spotify"
+main = "worker.mjs"
+compatibility_date = "2026-10-13"
+
+[vars]
+ALLOWED_ORIGINS = "https://xn--mark-oc2g.tw,https://qnianjun.github.io"
+
+# Run `npx wrangler kv namespace create SPOTIFY_TOKENS`, then replace this ID.
+[[kv_namespaces]]
+binding = "SPOTIFY_TOKENS"
+id = "REPLACE_WITH_KV_NAMESPACE_ID"
+
+# Set with `npx wrangler secret put NAME`, never add values here:
+# SPOTIFY_CLIENT_ID, SPOTIFY_CLIENT_SECRET, SPOTIFY_REFRESH_TOKEN

@@ -52,7 +52,14 @@ params:
   hidemeta: false
   hideSummary: false
 
+  spotify:
+    # Cloudflare Worker URL, e.g. https://mark-spotify.YOUR-SUBDOMAIN.workers.dev/now-playing
+    # Empty hides the card until the backend is connected.
+    endpoint: ""
+
   homeInfoParams:
+    # Set to /images/avatar.jpg after adding your photo under static/images/.
+    Avatar: ""
     AvatarText: "M"
     Eyebrow: "MARK · DIGITAL NOTEBOOK"
     Title: "Hi, I'm Mark!"

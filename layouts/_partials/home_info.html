@@ -3,8 +3,8 @@
     <div class="hero-layout">
         <section class="hero-profile">
         {{- with .Avatar }}
-        <div class="hero-avatar-wrap">
-            <img class="hero-avatar" src="{{ . | relURL }}" alt="{{ site.Params.author | default site.Title }}">
+        <div class="hero-avatar-wrap has-photo">
+            <img class="hero-avatar" width="96" height="96" decoding="async" src="{{ . | relURL }}" alt="{{ site.Params.author | default site.Title }}">
         </div>
         {{- else with .AvatarText }}
         <div class="hero-avatar-wrap hero-monogram" aria-label="{{ site.Params.author | default site.Title }}">{{ . }}</div>
@@ -30,6 +30,7 @@
             {{ partial "social_icons.html" (dict "align" site.Params.homeInfoParams.AlignSocialIconsTo) }}
         </footer>
         </section>
+        <div class="hero-sidebar">
         {{- with .SidePanel }}
         <aside class="hero-side-panel" aria-label="{{ .Title }}">
             {{- with .Eyebrow }}<p class="hero-eyebrow">{{ . }}</p>{{- end }}
@@ -44,6 +45,8 @@
             {{- end }}
         </aside>
         {{- end }}
+        {{ partial "spotify.html" $ }}
+        </div>
     </div>
 </article>
 {{- end -}}

@@ -1,0 +1,23 @@
+{{- with site.Params.spotify.endpoint }}
+<section class="music-card" data-now-playing data-endpoint="{{ . }}" aria-label="Mark 的 Spotify 動態">
+    <div class="music-heading">
+        <span class="hero-eyebrow">ON MY HEADPHONES</span>
+        <span class="music-bars" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+    </div>
+    <div class="music-content">
+        <div class="music-art">
+            <span class="music-placeholder" aria-hidden="true">♫</span>
+            <img data-music-image hidden width="64" height="64" alt="" referrerpolicy="no-referrer">
+        </div>
+        <div class="music-info" aria-live="polite" aria-atomic="true">
+            <p class="music-status" data-music-status>Spotify</p>
+            <h3 data-music-title>音樂動態</h3>
+            <p class="music-artist" data-music-artist>正在取得播放狀態…</p>
+        </div>
+    </div>
+    <a class="music-link" data-music-link href="https://open.spotify.com/" target="_blank" rel="noopener noreferrer">開啟 Spotify <span aria-hidden="true">↗</span></a>
+    <noscript><p class="music-note">開啟 JavaScript 即可查看音樂動態。</p></noscript>
+</section>
+{{- $script := resources.Get "js/now-playing.js" | resources.Minify | fingerprint }}
+<script defer src="{{ $script.RelPermalink }}" integrity="{{ $script.Data.Integrity }}" crossorigin="anonymous"></script>
+{{- end }}

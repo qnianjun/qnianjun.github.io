@@ -4,3 +4,10 @@ resources/_gen/
 .DS_Store
 .vscode/
 .idea/
+
+# Local service credentials and tooling
+.dev.vars*
+.env*
+.wrangler/
+node_modules/
+__pycache__/

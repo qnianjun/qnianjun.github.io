@@ -131,3 +131,32 @@ a:focus-visible, button:focus-visible, input:focus-visible {
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { scroll-behavior: auto !important; transition: none !important; animation: none !important; }
 }
+
+/* Personal profile and live music card. */
+.hero-sidebar { display: grid; gap: 18px; min-width: 0; }
+.hero-avatar-wrap.has-photo {
+  width: 96px; height: 96px; padding: 5px; border-radius: 28px;
+  background: var(--entry); box-shadow: 0 0 0 5px var(--accent-soft), var(--shadow);
+}
+.has-photo .hero-avatar { border-radius: 22px; object-position: center; }
+.music-card { padding: 24px; background: var(--entry); border: 1px solid var(--border); border-radius: 20px; box-shadow: var(--shadow); min-width: 0; }
+.music-heading { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 20px; }
+.music-heading .hero-eyebrow { margin: 0; font-size: 10px; }
+.music-bars { display: flex; align-items: center; gap: 3px; height: 18px; color: var(--accent); }
+.music-bars i { width: 3px; height: 4px; border-radius: 2px; background: currentColor; }
+.is-playing .music-bars i { height: 14px; animation: music-wave 1s ease-in-out infinite alternate; }
+.is-playing .music-bars i:nth-child(2) { animation-delay: -.6s; }
+.is-playing .music-bars i:nth-child(3) { animation-delay: -.3s; }
+.is-playing .music-bars i:nth-child(4) { animation-delay: -.8s; }
+.music-content { display: flex; align-items: center; gap: 16px; }
+.music-art { position: relative; flex: 0 0 64px; width: 64px; height: 64px; display: grid; place-items: center; background: var(--accent-soft); color: var(--accent); border-radius: 10px; overflow: hidden; }
+.music-placeholder { font-size: 28px; }
+.music-art img { position: absolute; inset: 0; width: 64px; height: 64px; object-fit: contain; }
+.music-art img[hidden] { display: none; }
+.music-info { min-width: 0; }
+.music-status { font-size: 11px; color: var(--accent); margin-bottom: 4px; }
+.music-info h3 { font-size: 16px; line-height: 1.5; overflow-wrap: anywhere; }
+.music-artist { font-size: 12px; line-height: 1.6; color: var(--secondary); margin-top: 3px; overflow-wrap: anywhere; }
+.music-link { display: flex; justify-content: space-between; align-items: center; min-height: 44px; margin-top: 16px; border-top: 1px solid var(--border); padding-top: 12px; color: var(--accent); font-size: 12px; }
+.music-note { font-size: 12px; color: var(--secondary); }
+@keyframes music-wave { from { transform: scaleY(.3); } to { transform: scaleY(1); } }
