@@ -1,56 +1,63 @@
+{{- $posts := where site.RegularPages "Section" "posts" -}}
+{{- $posts = where $posts "Params.hiddenInHomeList" "!=" true -}}
+{{- $postURLs := slice -}}
+{{- range $posts }}{{ $postURLs = $postURLs | append .RelPermalink }}{{ end -}}
 {{- with site.Params.homeInfoParams }}
 <article class="first-entry home-info hero-intro">
     <div class="hero-layout">
         <section class="hero-profile">
-        {{- with .Avatar }}
-        <div class="hero-avatar-wrap has-photo">
-            <img class="hero-avatar" width="96" height="96" decoding="async" src="{{ . | relURL }}" alt="{{ site.Params.author | default site.Title }}">
-        </div>
-        {{- else with .AvatarText }}
-        <div class="hero-avatar-wrap hero-monogram" aria-label="{{ site.Params.author | default site.Title }}">{{ . }}</div>
-        {{- end }}
-        {{- with .Eyebrow }}
-        <p class="hero-eyebrow">{{ . }}</p>
-        {{- end }}
-        <header class="entry-header">
-            <h1>{{ .Title | markdownify }}</h1>
-        </header>
-        <div class="entry-content md-content">
-            {{ $opts := dict "display" "block" }}
-            {{ .Content | $.Page.RenderString $opts }}
-        </div>
-        {{- with .Tags }}
-        <ul class="hero-tags" aria-label="Interests">
-            {{- range . }}
-            <li>{{ . }}</li>
+            <div class="profile-heading">
+                {{- with .Avatar }}
+                <div class="hero-avatar-wrap has-photo"><img class="hero-avatar" width="96" height="96" decoding="async" src="{{ . | relURL }}" alt="{{ site.Params.author | default site.Title }}"></div>
+                {{- else with .AvatarText }}
+                <div class="hero-avatar-wrap hero-monogram" aria-label="{{ site.Params.author | default site.Title }}">{{ . }}</div>
+                {{- end }}
+                <span class="profile-label">PERSONAL SPACE <span aria-hidden="true">/ 01</span></span>
+            </div>
+            {{- with .Eyebrow }}<p class="hero-eyebrow">{{ . }}</p>{{- end }}
+            <header class="entry-header"><h1>{{ .Title | markdownify }}</h1></header>
+            <p class="hero-subtitle">保持好奇，把探索留下來<span class="terminal-cursor" aria-hidden="true">_</span></p>
+            <div class="entry-content md-content">{{ .Content | $.Page.RenderString (dict "display" "block") }}</div>
+            {{- with .Tags }}
+            <ul class="hero-tags" aria-label="Interests">{{ range . }}<li>{{ . }}</li>{{ end }}</ul>
             {{- end }}
-        </ul>
-        {{- end }}
-        <footer class="entry-footer">
-            {{ partial "social_icons.html" (dict "align" site.Params.homeInfoParams.AlignSocialIconsTo) }}
-        </footer>
+            <div class="hero-actions">
+                <a class="action-primary" href="{{ "posts/" | relURL }}">探索文章 <span aria-hidden="true">↗</span></a>
+                <a class="action-secondary" href="{{ "search/" | relURL }}">搜尋筆記 <kbd>/</kbd></a>
+            </div>
+            <footer class="entry-footer">{{ partial "social_icons.html" (dict "align" site.Params.homeInfoParams.AlignSocialIconsTo) }}</footer>
         </section>
         <div class="hero-sidebar">
-        {{- with .SidePanel }}
-        <aside class="hero-side-panel" aria-label="{{ .Title }}">
-            {{- with .Eyebrow }}<p class="hero-eyebrow">{{ . }}</p>{{- end }}
-            {{- with .Title }}<h2>{{ . }}</h2>{{- end }}
-            {{- with .Content }}<p>{{ . }}</p>{{- end }}
-            {{- with .Links }}
-            <ul>
-                {{- range . }}
-                <li><a href="{{ .url | relURL }}">{{ .name }} <span aria-hidden="true">↗</span></a></li>
-                {{- end }}
-            </ul>
-            {{- end }}
-        </aside>
-        {{- end }}
-        {{ partial "spotify.html" $ }}
+            <aside class="notebook-panel" aria-label="數位筆記本概況">
+                <div class="terminal-bar"><span class="terminal-dots" aria-hidden="true"><i></i><i></i><i></i></span><span>mark@notebook: ~</span><span aria-hidden="true">⌘</span></div>
+                <div class="notebook-body">
+                    <p class="terminal-command"><span aria-hidden="true">❯</span> cat notebook.md</p>
+                    <h2>Learn. Build.<br><span>Write. Repeat.</span></h2>
+                    <p class="notebook-description">資安探索、程式實驗，<br>以及那些值得記錄的靈光一閃。</p>
+                    <dl class="notebook-stats">
+                        <div><dt>篇文章</dt><dd>{{ printf "%02d" (len $posts) }}</dd></div>
+                        <div><dt>個標籤</dt><dd>{{ printf "%02d" (len site.Taxonomies.tags) }}</dd></div>
+                        <div><dt>個分類</dt><dd>{{ printf "%02d" (len site.Taxonomies.categories) }}</dd></div>
+                    </dl>
+                    {{- range first 1 $posts.ByDate.Reverse }}
+                    <div class="notebook-update"><span class="status-dot" aria-hidden="true"></span>最新筆記 <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2006.01.02" }}</time></div>
+                    {{- end }}
+                </div>
+                <div class="notebook-links"><a href="{{ "about/" | relURL }}">關於我 ↗</a><a href="{{ "archives/" | relURL }}">時間軸 ↗</a><a href="{{ "index.xml" | relURL }}">RSS ↗</a></div>
+            </aside>
+            {{ partial "spotify.html" $ }}
         </div>
     </div>
 </article>
-{{- end -}}
-<div class="section-heading">
-    <h2>最新文章 <span aria-hidden="true">↘</span></h2>
-    <a href="{{ "posts/" | relURL }}">所有文章 <span aria-hidden="true">↗</span></a>
+{{- end }}
+{{- with site.Taxonomies.tags }}
+<section class="topic-shelf" aria-labelledby="topic-heading">
+    <div class="topic-intro"><span class="hero-eyebrow">EXPLORE BY TOPIC</span><h2 id="topic-heading">好奇心的方向</h2></div>
+    <div class="topic-links">{{ range first 6 .ByCount }}<a href="{{ .Page.RelPermalink }}"><span class="topic-hash" aria-hidden="true">#</span>{{ .Page.LinkTitle }}<span class="topic-count" aria-label="{{ .Count }} 篇文章">{{ printf "%02d" .Count }}</span></a>{{ end }}</div>
+    <a class="all-topics" href="{{ "tags/" | relURL }}" aria-label="查看所有標籤">全部主題 ↗</a>
+</section>
+{{- end }}
+<div class="section-heading" id="latest-posts">
+    <div><p class="hero-eyebrow">THE FIELD NOTES</p><h2>最新文章 <span aria-hidden="true">↘</span></h2></div>
+    {{- with $posts }}<a class="random-post" href="{{ (index . 0).RelPermalink }}" data-random-posts="{{ $postURLs | jsonify }}">隨機讀一篇 <span aria-hidden="true">⤨</span></a>{{ end }}
 </div>

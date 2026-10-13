@@ -116,6 +116,11 @@ params:
 
 menu:
   main:
+    - identifier: search
+      name: Search
+      url: /search/
+      weight: 70
+
     - identifier: posts
       name: Blog
       url: /posts/

@@ -1,0 +1,8 @@
+{{- if eq .Section "posts" }}
+<div class="reading-progress" data-reading-progress role="progressbar" aria-label="文章閱讀進度" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" hidden><span></span></div>
+<div class="article-signoff">
+    <div><p class="hero-eyebrow">END OF NOTE</p><p>記錄到這裡，下個探索見。</p></div>
+    <button class="copy-article" type="button" data-copy-article hidden>複製文章連結 ↗</button>
+    <span class="copy-status" data-copy-status role="status"></span>
+</div>
+{{- end }}

@@ -74,3 +74,11 @@ Replace the placeholder links and author name before publishing.
 ## Spotify 與頭像
 
 首頁支援 Spotify「正在聽」卡片與個人照片。設定方式見 [Spotify 與頭像設定](workers/spotify/README.md)。
+
+## 筆記本介面
+
+- 首頁資訊面板會依已發布文章自動產生文章數、標籤數、分類數與最新文章日期。
+- 主題捷徑連到實際標籤頁；「隨機讀一篇」從已發布文章中選取。
+- 按 `/` 或 `Ctrl/Cmd + K` 開啟搜尋；在輸入框中不攔截按鍵。
+- 文章頁提供頂部閱讀進度及複製文章連結。
+- 網格、資訊面板與文章卡片樣式由 `assets/css/extended/custom.css` 管理。

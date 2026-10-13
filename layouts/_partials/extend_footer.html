@@ -24,3 +24,6 @@
     });
 })();
 </script>
+
+{{- $notebook := resources.Get "js/notebook.js" | resources.Minify | fingerprint }}
+<script defer src="{{ $notebook.RelPermalink }}" integrity="{{ $notebook.Data.Integrity }}" crossorigin="anonymous" data-search-url="{{ "search/" | relURL }}"></script>
