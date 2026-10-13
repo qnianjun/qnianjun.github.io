@@ -1,0 +1,26 @@
+<script>
+(() => {
+    const root = document.documentElement;
+    const button = document.getElementById('theme-toggle');
+    const systemTheme = window.matchMedia('(prefers-color-scheme: dark)');
+    const syncTheme = () => {
+        const dark = root.dataset.theme === 'dark';
+        if (button) {
+            const label = dark ? '切換為淺色模式' : '切換為深色模式';
+            button.setAttribute('aria-label', label);
+            button.title = label + ' (Alt + T)';
+        }
+        const meta = document.querySelector('meta[name="theme-color"]');
+        if (meta) meta.content = dark ? '#111916' : '#f7f8f4';
+    };
+    syncTheme();
+    new MutationObserver(syncTheme).observe(root, { attributes: true, attributeFilter: ['data-theme'] });
+    systemTheme.addEventListener('change', (event) => {
+        let preference;
+        try { preference = localStorage.getItem('pref-theme'); } catch (_) {}
+        if (preference !== 'light' && preference !== 'dark') {
+            root.dataset.theme = event.matches ? 'dark' : 'light';
+        }
+    });
+})();
+</script>
