@@ -10,7 +10,8 @@
 
 - 名稱：`Mark Blog Now Playing`
 - Website：`https://xn--mark-oc2g.tw/`
-- Redirect URI：`http://127.0.0.1:8888/callback`（精確一致，不用 localhost）
+- Redirect URI：`http://127.0.0.1:8888/callback`（精確一致，不用 localhost）。
+  8888 已被占用時可改用其他 port，例如 `http://127.0.0.1:8899/callback`，下一步執行時帶同一個 port。
 - API：Web API
 
 目前開發模式要求 App 擁有者具備 Spotify Premium。
@@ -21,7 +22,8 @@
 需要 Python 3。在有瀏覽器的個人電腦上，從本 repo 根目錄執行：
 
 ```sh
-python3 scripts/spotify-authorize.py
+python3 scripts/spotify-authorize.py        # 使用 8888
+python3 scripts/spotify-authorize.py 8899   # 8888 被占用時改用其他 port
 ```
 
 依提示輸入 Client ID 與 Client Secret。瀏覽器登入自己的 Spotify 帳號並同意授權。

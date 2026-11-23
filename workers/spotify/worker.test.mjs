@@ -13,8 +13,8 @@ function environment() {
 }
 const tokenResponse = () => Response.json({ access_token: 'private-access', expires_in: 3600, refresh_token: 'rotated-refresh' });
 const track = {
-  is_playing: true, currently_playing_type: 'track',
-  item: { name: 'A song', artists: [{ name: 'An artist' }], album: { name: 'An album', images: [{ width: 300, url: 'https://i.scdn.co/image/abc' }] }, external_urls: { spotify: 'https://open.spotify.com/track/abc123' } },
+  is_playing: true, currently_playing_type: 'track', progress_ms: 42000,
+  item: { name: 'A song', duration_ms: 261000, artists: [{ name: 'An artist' }], album: { name: 'An album', images: [{ width: 300, url: 'https://i.scdn.co/image/abc' }] }, external_urls: { spotify: 'https://open.spotify.com/track/abc123' } },
 };
 
 test('returns only public metadata, rotates tokens, and caches requests', async t => {
@@ -76,4 +76,31 @@ test('honors Spotify rate limit before retrying upstream', async t => {
   assert.equal((await worker.fetch(request(), environment())).status, 503);
   assert.equal((await worker.fetch(request(), environment())).status, 503);
   assert.equal(calls, 2);
+});
+
+test('returns track timing and advances cached progress to response time', async t => {
+  t.mock.method(globalThis, 'fetch', async url => url.includes('/api/token') ? tokenResponse() : Response.json(track));
+  t.mock.timers.enable({ apis: ['Date'], now: 1_000_000 });
+  const worker = createWorker();
+  const first = await (await worker.fetch(request(), environment())).json();
+  assert.equal(first.duration, 261000);
+  assert.equal(first.progress, 42000);
+  assert.ok(!('measuredAt' in first));
+  t.mock.timers.tick(10000);
+  assert.equal((await (await worker.fetch(request(), environment())).json()).progress, 52000);
+  t.mock.timers.tick(19000);
+  const late = createWorker();
+  t.mock.method(globalThis, 'fetch', async url => url.includes('/api/token') ? tokenResponse() :
+    Response.json({ ...track, progress_ms: 260000 }));
+  await late.fetch(request(), environment());
+  t.mock.timers.tick(25000);
+  assert.equal((await (await late.fetch(request(), environment())).json()).progress, 261000);
+});
+
+test('omits timing when Spotify does not report it', async t => {
+  t.mock.method(globalThis, 'fetch', async url => url.includes('/api/token') ? tokenResponse() :
+    Response.json({ ...track, progress_ms: null }));
+  const body = await (await createWorker().fetch(request(), environment())).json();
+  assert.equal(body.status, 'playing');
+  assert.ok(!('progress' in body) && !('duration' in body));
 });

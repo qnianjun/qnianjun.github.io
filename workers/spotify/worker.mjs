@@ -62,6 +62,9 @@ export function createWorker() {
       return { status: 'idle' };
     }
     const image = item.album?.images?.find(image => image.width >= 160)?.url || '';
+    const duration = item.duration_ms;
+    const progress = data.progress_ms;
+    const hasTiming = typeof duration === 'number' && typeof progress === 'number' && Number.isFinite(duration) && duration > 0 && Number.isFinite(progress) && progress >= 0;
     return {
       status: 'playing',
       title: item.name,
@@ -69,7 +72,15 @@ export function createWorker() {
       album: item.album?.name || '',
       image: /^https:\/\/i\.scdn\.co\//.test(image) ? image : '',
       url,
+      // Progress is measured here and advanced to response time in fetch(), so the 30 s cache stays accurate.
+      ...(hasTiming ? { duration: Math.round(duration), progress: Math.round(Math.min(progress, duration)), measuredAt: Date.now() } : {}),
     };
+  }
+
+  function present(data) {
+    if (data.status !== 'playing' || !('measuredAt' in data)) return data;
+    const { measuredAt, ...rest } = data;
+    return { ...rest, progress: Math.min(rest.duration, rest.progress + Math.max(0, Date.now() - measuredAt)) };
   }
 
   return {
@@ -100,7 +111,7 @@ export function createWorker() {
           }
           await pending;
         }
-        return json(snapshot);
+        return json(present(snapshot));
       } catch (_) {
         retryUntil = Math.max(retryUntil, Date.now() + 60000);
         // Do not expose Spotify responses, credentials, or a stale playing state.

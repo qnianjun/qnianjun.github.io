@@ -3,7 +3,9 @@
 import base64
 import getpass
 import json
+import os
 import secrets
+import sys
 import time
 import urllib.error
 import urllib.parse
@@ -13,7 +15,20 @@ from http.server import BaseHTTPRequestHandler, HTTPServer
 
 
 def main():
-    redirect_uri = 'http://127.0.0.1:8888/callback'
+    # Port must match the Redirect URI registered in the Spotify app. Override if 8888 is taken:
+    #   python3 scripts/spotify-authorize.py 8899   (or SPOTIFY_AUTH_PORT=8899)
+    raw_port = sys.argv[1] if len(sys.argv) > 1 else os.environ.get('SPOTIFY_AUTH_PORT', '8888')
+    if not raw_port.isdigit() or not 1024 <= int(raw_port) <= 65535:
+        raise SystemExit('Port must be a number between 1024 and 65535.')
+    port = int(raw_port)
+    redirect_uri = f'http://127.0.0.1:{port}/callback'
+    busy = f'Port {port} 已被占用，請換一個，例如：python3 scripts/spotify-authorize.py {port + 11}'
+    try:
+        with HTTPServer(('127.0.0.1', port), BaseHTTPRequestHandler):
+            pass  # Fail fast, before asking for credentials.
+    except OSError:
+        raise SystemExit(busy)
+    print('Spotify App 的 Redirect URI 必須設定為：' + redirect_uri)
     client_id = input('Spotify Client ID: ').strip()
     client_secret = getpass.getpass('Spotify Client Secret (hidden): ').strip()
     if not client_id or not client_secret:
@@ -43,7 +58,11 @@ def main():
         'client_id': client_id, 'response_type': 'code', 'redirect_uri': redirect_uri,
         'scope': 'user-read-currently-playing', 'state': state,
     })
-    with HTTPServer(('127.0.0.1', 8888), Callback) as server:
+    try:
+        server = HTTPServer(('127.0.0.1', port), Callback)
+    except OSError:
+        raise SystemExit(busy)
+    with server:
         server.timeout = 1
         print('請在執行此程式的電腦上開啟以下網址，登入你要顯示的 Spotify 帳號：\n' + url)
         webbrowser.open(url)

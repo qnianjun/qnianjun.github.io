@@ -57,7 +57,7 @@ params:
   spotify:
     # Cloudflare Worker URL, e.g. https://mark-spotify.YOUR-SUBDOMAIN.workers.dev/now-playing
     # Empty hides the card until the backend is connected.
-    endpoint: ""
+    endpoint: "https://mark-spotify.qin-nian-jun-taichung.workers.dev/now-playing"
 
   homeInfoParams:
     # Put a photo at static/images/avatar.jpg and set Avatar: "/images/avatar.jpg" to show it.
