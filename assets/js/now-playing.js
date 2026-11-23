@@ -8,9 +8,9 @@
     const playing = data.status === 'playing' && typeof data.title === 'string' &&
       /^https:\/\/open\.spotify\.com\/track\/[A-Za-z0-9]+$/.test(data.url || '');
     card.classList.toggle('is-playing', playing);
-    get('status').textContent = playing ? '正在聽 · Spotify' : 'Spotify';
-    get('title').textContent = playing ? data.title : data.status === 'idle' ? '耳機休息中' : '音樂動態暫時離線';
-    get('artist').textContent = playing ? data.artist : data.status === 'idle' ? '下一首好歌，待續。' : '稍後再回來聽聽。';
+    get('status').textContent = playing ? '正在聽' : 'Spotify';
+    get('title').textContent = playing ? data.title : data.status === 'idle' ? '現在沒在聽' : '讀不到播放狀態';
+    get('artist').textContent = playing ? data.artist : '';
     get('link').href = playing ? data.url : 'https://open.spotify.com/';
     const image = get('image');
     const imageURL = playing && /^https:\/\/i\.scdn\.co\//.test(data.image || '') ? data.image : '';

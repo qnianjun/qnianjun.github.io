@@ -53,9 +53,9 @@
       try {
         const url = document.querySelector('link[rel="canonical"]')?.href || location.href.split('#')[0];
         await navigator.clipboard.writeText(url);
-        status.textContent = '連結已複製！';
+        status.textContent = '已複製';
       } catch (_) {
-        status.textContent = '無法自動複製，請複製網址列的連結。';
+        status.textContent = '複製失敗，請直接複製網址列';
       }
     });
   }

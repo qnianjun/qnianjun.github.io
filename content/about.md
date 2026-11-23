@@ -1,21 +1,18 @@
 ---
-title: "About"
-description: "About me and this site."
+title: "關於"
+hidemeta: true
 ---
 
-# About
+我是 Mark，一個在學資安的學生。
 
-Hi! I'm **Mark**.
+目前最有興趣的是 Web security 和 AI security，平常會打 CTF，有機會就去參加資安活動。今年去了 AIS3 Junior 跟 HITCON，心得都寫在這裡。
 
-I use this site to document:
+這裡會放：
 
-- Cybersecurity
-- CTF writeups
-- Programming
-- Linux / Docker
-- Personal projects
-- Random technical notes
+- CTF 解題紀錄
+- 參加課程、研討會的心得
+- 學 Linux、Docker、寫程式時踩過的坑
 
-## Contact
+寫的東西如果有錯，歡迎直接到 GitHub 開 issue 告訴我。
 
-GitHub: [https://github.com/qnianjun/](https://github.com/qnianjun/)
+GitHub：[qnianjun](https://github.com/qnianjun)

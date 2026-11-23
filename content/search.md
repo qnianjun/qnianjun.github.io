@@ -1,7 +1,6 @@
 ---
-title: "搜尋筆記"
+title: "搜尋"
 layout: "search"
 summary: "Search this site"
-placeholder: "試試 AIS3、CTF、Linux…"
-description: "從一個關鍵字，找到下一個想探索的方向。"
+placeholder: "輸入關鍵字，例如 AIS3、XSS"
 ---

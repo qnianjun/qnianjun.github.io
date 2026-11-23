@@ -26,7 +26,7 @@ taxonomies:
 params:
   env: production
   title: "Mark"
-  description: "Cybersecurity, programming, projects, CTF writeups and notes."
+  description: "Mark 的資安筆記：CTF、Web / AI security、活動心得。"
   keywords:
     - Cybersecurity
     - Programming
@@ -44,7 +44,9 @@ params:
   ShowPostNavLinks: true
   ShowBreadCrumbs: true
   ShowCodeCopyButtons: true
-  ShowWordCount: true
+  ShowWordCount: false
+  hideAuthor: true
+  DateFormat: "2006-01-02"
   ShowRssButtonInSectionTermList: true
   UseHugoToc: true
   showtoc: false
@@ -58,29 +60,14 @@ params:
     endpoint: ""
 
   homeInfoParams:
-    # Set to /images/avatar.jpg after adding your photo under static/images/.
+    # Put a photo at static/images/avatar.jpg and set Avatar: "/images/avatar.jpg" to show it.
     Avatar: ""
-    AvatarText: "M"
-    Eyebrow: "MARK · DIGITAL NOTEBOOK"
-    Title: "Hi, I'm Mark!"
-    Content: >
-      A place for security notes, things I build, and the rabbit holes worth documenting.
-    Tags:
-      - Security learner
-      - CTF explorer
-      - Builder
-      - Linux user
-    SidePanel:
-      Eyebrow: "START HERE"
-      Title: "Explore"
-      Content: "A few places to start, with room for whatever you are working on next."
-      Links:
-        - name: "Read the blog"
-          url: "/posts/"
-        - name: "See projects"
-          url: "/projects/"
-        - name: "About me"
-          url: "/about/"
+    Title: "Mark"
+    Content: "正在學資安的學生。這裡放 CTF 解題、參加活動的心得，還有學東西時順手記下來的筆記。"
+    Topics:
+      - web security
+      - ai security
+      - ctf
 
   socialIcons:
     - name: github
@@ -116,40 +103,25 @@ params:
 
 menu:
   main:
-    - identifier: search
-      name: Search
-      url: /search/
-      weight: 70
-
     - identifier: posts
-      name: Blog
+      name: posts
       url: /posts/
       weight: 10
 
-    - identifier: projects
-      name: Projects
-      url: /projects/
+    - identifier: tags
+      name: tags
+      url: /tags/
       weight: 20
 
-    - identifier: categories
-      name: Categories
-      url: /categories/
+    - identifier: about
+      name: about
+      url: /about/
       weight: 30
 
-    - identifier: tags
-      name: Tags
-      url: /tags/
+    - identifier: search
+      name: search
+      url: /search/
       weight: 40
-
-    - identifier: archives
-      name: Archives
-      url: /archives/
-      weight: 50
-
-    - identifier: about
-      name: About
-      url: /about/
-      weight: 60
 
 markup:
   highlight:
